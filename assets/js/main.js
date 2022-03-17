@@ -67,7 +67,7 @@ https.get(`${urlAPI}`, (resp) => {
 const registroCotizacion = (jsonData) => {
 
     //opcion 1 : fecha de la API
-    let fechaAPI = new Date(jsonData.dolar.fecha)
+    //let fechaAPI = new Date(jsonData.dolar.fecha)
 
     //opcion 2 : fecha actual
     let fecha = new Date()
