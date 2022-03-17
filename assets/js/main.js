@@ -22,10 +22,10 @@ var archivo = `${nombre}${indicador}.${extension}`
 
 
 //consulta por tipo de indicador
-let urlApiIndicador = `https://mindicador.cl/api/${indicador}`
+//let urlApiIndicador = `https://mindicador.cl/api/${indicador}`
 
 //consulta por tipo de indicador y fecha especificada
-let urlApiIndicadorFecha = `https://mindicador.cl/api/${indicador}/${fecha}`
+//let urlApiIndicadorFecha = `https://mindicador.cl/api/${indicador}/${fecha}`
 
 //url API
 let urlAPI = 'https://mindicador.cl/api'

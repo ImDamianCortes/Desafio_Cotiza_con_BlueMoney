@@ -3,7 +3,7 @@
 a = "Cotizacion"    // argumento[0]
 b = "txt"           // argumento[1]
 c = "Dolar"         // argumento[2]
-d = 250000          // argumento[3]
+d = 50000          // argumento[3]
 
 var exec = require('child_process').exec
 
