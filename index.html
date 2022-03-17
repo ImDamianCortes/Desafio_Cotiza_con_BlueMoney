@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!-- Prism -->
+    <link rel="stylesheet" href="assets/css/prism.css">
+
+    <!-- Estilo Propio -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+
+    <title>Desafio - Cotiza con BlueMoney</title>
+</head>
+
+<body>
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark position-fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">ImDamian</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link text-center" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-center" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-center" href="#">Pricing</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Section Header -->
+    <section class="container-fluid py-3 bg-dark text-white">
+        <h1 class="text-center container">Desafio - Cotiza con BlueMoney</h1>
+        <h5 class="text-center mt-3 text-success">Modulo 6</h5>
+    </section>
+    <!-- Section Columns-->
+    <section class="container-fluid row">
+        <!-- PDF -->
+        <div class="col-12 col-sm-8 col-lg-6 mx-auto">
+            <embed src="assets/others/03_d_Desafío_-_Cotiza_con_BlueMoney_.pdf" type="application/pdf"
+                class="w-100 d-block mx-auto my-3 ">
+        </div>
+        <!-- body -->
+        <div class="col-lg-6">
+            <h2 class="text-center py-3 my-3 bg-dark text-success rounded-pill">Desarrollo de requerimientos</h2>
+            <!-- Accordion -->
+            <div class="accordion">
+                <!-- Item 01 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button bg-dark text-white" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            1. Recibir por la línea de comando los siguientes argumentos:
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <ol type="a">
+                                <li>Nombre del archivo que se creará.</li>
+                                <li>Extensión del archivo</li>
+                                <li>Indicador económico que se desea convertir</li>
+                                <li>Cantidad de pesos que se quiere cambiar.</li>
+                            </ol>
+
+                            <pre><code class="language-js">    //recepcion de argumentos ingresados por linea de comandos
+    const argumentos = process.argv.slice(2)
+    
+    //almacenamiento de argumentos en variables
+    var nombre = String(argumentos[0])
+    var extension = String(argumentos[1])
+    var indicador = String(argumentos[2])
+    var cantidad = Number(argumentos[3])</code></pre>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 02 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed bg-dark text-white" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                            aria-controls="collapseTwo">
+                            2.- Consultar la API con el módulo https y almacenar la respuesta en una variable
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <pre><code class="language-js">    //consulta metodo get a la API
+    https.get(`${urlAPI}`, (resp) => {
+        //almacenando la data
+        let data = '';
+    
+        resp.on('data', (chunk) => {
+            data += chunk;
+        });
+    
+        resp.on('end', () => {
+            
+            let jsonData = JSON.parse(data);
+    
+            //llamado a la funcion
+            registroCotizacion(jsonData)
+    
+               
+        })
+    })
+    .on('error', (err) => {
+        console.log('Error: ' + err.message); // Impresión por consola del error
+    });</code></pre>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 03 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed bg-dark text-white" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
+                            aria-controls="collapseThree">
+                            3. Crear un archivo con el módulo fs cuyos datos están formados por los argumentos
+                            recibidos por línea de comando y su contenido basado en el template de la
+                            descripción.
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <pre><code class="language-js">    //crear archivo
+    const fs = require('fs')
+
+    //leer el archivo
+    fs.readFile(`${archivo}`, 'utf8',
+        (err, data) => {
+            //nueva insercion
+            fs.writeFile(`${archivo}`, data +
+                `
+                ${contenido}`, 'utf8',
+                () => {
+                    //mostrar por consola la nueva insercion
+                    //se da solucion al requerimiento 4
+                    console.log(contenido)
+                }
+            )
+        }
+    )</code></pre>
+                        </div>
+                    </div>
+                </div>
+                <!-- Item 04 -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed bg-dark text-white" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false"
+                            aria-controls="collapseFour">
+                            5. Ejecutar la aplicación desde un archivo externo con el módulo child_process enviando los
+                            argumentos correspondientes y devolviendo por consola el contenido del archivo luego de que
+                            haya sido creado.
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <pre><code class="language-js">    // Argumentos
+
+    a = "Cotizacion"    // argumento[0]
+    b = "txt"           // argumento[1]
+    c = "Dolar"         // argumento[2]
+    d = 250000          // argumento[3]
+    
+    var exec = require('child_process').exec
+    
+    var modulo = `node main.js ${a} ${b} ${c} ${d}`
+    
+    // donde se ejecuta con node main.js
+    exec(`${modulo}`, function (err, stdout, stderr) {
+      console.log(stdout)
+    })</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="text-center py-3">
+        <h3 class="my-3">Notas:</h3>
+        <p>testeando la librearia <a href="https://prismjs.com/">prismjs</a> para dar estilo a codigo insertado en html
+        </p>
+        <p>Para probar aplicacion se debe ingresar primero mediante la linea de comandos a la ruta del archivo, en este caso directorio/assets e ingresar <strong>'node app.js'</strong></p>
+    </div>
+
+    <!-- Separate Popper and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+
+
+    <!-- Prism -->
+    <script src="assets/js/prism.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+body {
+  background-color: rgba(128, 128, 128, 0.041);
+}
+embed {
+  height: 800px;
+}
+
+pre {
+  border-radius: 7px;
+}
+
+img {
+  border-radius: 5px;
+  max-width: 100%;
+}
+
+.accordion {
+  border: 0px transparent !important;
+  background-color: transparent;
+}
+.accordion-button{
+  margin-bottom: 5px;
+  border-radius: 3px;
+}
+img {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
